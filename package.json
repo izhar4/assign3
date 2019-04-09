@@ -1,0 +1,29 @@
+{
+  "name": "city_star_back",
+  "version": "1.0.0",
+  "description": "city star Microservice",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start-prod": "NODE_ENV=production node server.js"
+  },
+  "author": "Izhar Ahmad",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.3.0",
+    "body-parser": "^1.15.0",
+    "connect-timeout": "1.8.0",
+    "cookie-parser": "^1.4.1",
+    "cors": "*",
+    "express": "^4.13.4",
+    "express-session": "^1.15.6",
+    "fs": "0.0.2",
+    "mongoose": "^5.0.0",
+    "underscore": "^1.8.3"
+  },
+  "engines": {
+    "node": "8.9.4",
+    "npm": "6.5.0"
+  }
+}
