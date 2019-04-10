@@ -80,7 +80,6 @@ studentController.useraccountsActivate = async (req, res) => {
 
 studentController.userAccountsRegister = async (req, res) => {
     const userData = req.body.userData;
-    console.log('datatattatata controler', userData)
     if (userData.password != userData.passwordConfirm) {
         return {
             message: "Passwords do not match"
@@ -106,7 +105,7 @@ studentController.userAccountsRegister = async (req, res) => {
         };
     } catch (error) {
         if(error.code === 11000){
-            throw new CustomError('User account creation - cannot create; user already exists')
+            throw new CustomError('User account creation - cannot create; user already exists', 409)
         }
         throw new CustomError(DB_CONSTANTS.ERROR_MESSAGES.INTERNAL_SERVER_ERROR, 500);
     }
