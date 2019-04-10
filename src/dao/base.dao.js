@@ -45,6 +45,10 @@ class BaseDao {
 	insertOne(doc) {
 		return this.model.insertOne(doc);
 	}
+
+	saveData(doc){
+		return this.model.create(doc);
+	}
   
 	/**
      * remove a single doc
