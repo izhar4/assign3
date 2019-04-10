@@ -94,5 +94,15 @@ router.post('/useraccounts/create', async (req, res, next) => {
   }
 })
 
+router.post("/useraccounts/login", async (req, res) => {
+  try {
+    const data = await studentController.useraccountsLogin(req, res);
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 module.exports = router;

@@ -6,6 +6,7 @@ const CustomError = require('../errors/custom-errors');
 const DB_CONSTANTS = require('../../config/dbConstants');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 
 studentController.getStudentsList = async (req, res) => {
     try {
@@ -104,10 +105,41 @@ studentController.userAccountsRegister = async (req, res) => {
             message: "User account activation - not found"
         };
     } catch (error) {
-        if(error.code === 11000){
+        if (error.code === 11000) {
             throw new CustomError('User account creation - cannot create; user already exists', 409)
         }
         throw new CustomError(DB_CONSTANTS.ERROR_MESSAGES.INTERNAL_SERVER_ERROR, 500);
+    }
+}
+
+studentController.useraccountsLogin = async (req, res) => {
+    try {
+        const userData = req.body.userData;
+        const user = await studentService.findUser(userData);
+        if (user) {
+            let isPasswordMatch = bcrypt.compareSync(userData.password, user.password);
+            if (isPasswordMatch) {
+                var payload = {
+                    _id: user._id,
+                    userName: user.userName,
+                    fullName: user.fullName,
+                    role: user.role
+                };
+                var token = jwt.sign(payload, 'big-long-string-from-lastpass.com/generatepassword.php');
+                // Return the result
+                return {
+                    "message": "Login was successful",
+                    token: token
+                };
+            } else {
+                return {
+                    message: 'Login was not successful'
+                };
+            }
+        }
+        return {message: 'Login - not found'}
+    } catch (error) {
+
     }
 }
 

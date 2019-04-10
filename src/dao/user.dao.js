@@ -18,8 +18,14 @@ async function insertUser(data){
     return userData;
 }
 
+async function findUser(query){
+    const resp = await userAccountsDao.findOne(query);
+    return resp;
+}
+
 
 module.exports = {
     updateUserData,
-    insertUser
+    insertUser,
+    findUser
 };

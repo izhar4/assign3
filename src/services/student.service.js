@@ -81,6 +81,13 @@ async function userAccountsRegister(userData) {
 
 }
 
+
+async function findUser(userData){
+   const query =  { userName: userData.userName };
+   const resp = await userDao.findUser(query);
+   return resp;
+}
+
 module.exports = {
     getStudentsList,
     getStudentById,
@@ -89,5 +96,6 @@ module.exports = {
     updateStudentSavedCourses,
     updateStudentsConfirmedCourses,
     useraccountsActivate,
-    userAccountsRegister
+    userAccountsRegister,
+    findUser
 };
